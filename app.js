@@ -1,8 +1,4 @@
 const Wrapper = document.querySelector(".cards")
-// const button = document.querySelector(".btn")
-
-
-
 
 const products = [
     {
