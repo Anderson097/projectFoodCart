@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: "Red Hat Text", sans-serif;
+}
+
+body{
+    background-color: hsl(13, 31%, 94%);
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 5rem 6rem;
+    gap: 2rem;
+}
+
+.cards{
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.placeOrder > h2{
+    text-transform: capitalize;
+    color: hsl(14, 65%, 9%);
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.cardOne{
+    display: flex;
+    flex-direction: column;
+    /* height: 30vh;
+    width: 20vw; */
+}
+
+.cardImg{
+    display: flex;
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    justify-content: center;
+    /* height: 30vh;
+    width: 20vw; */
+    position: relative;
+}
+
+.cardImg > img{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.cardImg > button{
+    position: absolute;
+    bottom: -10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid hsl(12, 20%, 44%);
+    border-radius: 20px;
+    color: hsl(14, 65%, 9%);
+    padding: .3rem 1.5rem;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: hsl(14, 86%, 42%);
+    color: #fff;
+}
+
+.cardCont{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: .5rem;
+}
+
+.cardCont > p{
+    /* margin-block: .5rem; */
+    color: hsl(12, 20%, 44%);
+    font-size: 13px;
+}
+
+.cardCont > span{
+    color: hsl(14, 86%, 42%);
+    font-weight: 600;
+}
+
+
+.cardCont > h3{
+    color: hsl(14, 65%, 9%);
+    font-size: 16px;
+}
+
+.cartCard{
+    background-color: hsl(20, 50%, 98%);
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.cartCard > h3{
+    text-transform: capitalize;
+    color: hsl(14, 86%, 42%);
+    font-weight: 700;
+    /* margin: 1rem; */
+}
+
+.yourCartImg{
+    height: 20vh;
+    width: 20vw;
+    margin: auto;
+}
+
+.yourCartImg > Img{
+    height: 100%;
+    width: 100%;
+}
+
+.cartCard > p{
+    margin: auto;
+    font-size: 13px;
+    font-weight: 500;
+    color: hsl(12, 20%, 44%);
+}
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        margin: 3rem 2rem;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .yourCartImg {
+        height: 25vh;
+        width: 60vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 2rem 1rem;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .cardImg > button {
+        font-size: 12px;
+        padding: 0.4rem 1.2rem;
+    }
+
+    .cardCont {
+        margin-top: 1rem;
+    }
+
+    .yourCartImg {
+        height: 22vh;
+        width: 70vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .placeOrder > h2 {
+        font-size: 24px;
+        margin-bottom: 1.5rem;
+    }
+
+    .cardCont > h3 {
+        font-size: 14px;
+    }
+
+    .cardCont > p {
+        font-size: 12px;
+    }
+
+    .cardCont > span {
+        font-size: 13px;
+    }
+
+    .cardImg > button {
+        font-size: 11px;
+        padding: 0.3rem 1rem;
+    }
+
+    .yourCartImg {
+        height: 20vh;
+        width: 80vw;
+    }
+
+    .cartCard {
+        padding: 0.8rem;
+    }
+
+    .cartCard > p {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .cartCard > h3 {
+        font-size: 16px;
+        text-align: center;
+    }
+}
