@@ -1,11 +1,98 @@
-const Wrapper = document.querySelector(".cards")
+const Wrapper = document.querySelector(".cards");
+const cartContainer = document.querySelector(".cartCard");
+let cart = [];
 
+// Function to update the cart display
+function updateCartDisplay() {
+    cartContainer.innerHTML = `<h3>Your Cart (${cart.length})</h3>`; // Update cart header with item count
+    cart.forEach(item => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cartItem");
+
+        cartItem.innerHTML = `
+            <div class="cartItemDetails">
+                <div>
+                    <h4>${item.name}</h4>
+                    <p>$${item.price} x ${item.quantity}</p>
+                </div>
+            </div>
+            <div class="cartItemQuantity">
+                <button class="decrease">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase">+</button>
+            </div>
+        `;
+
+        // Add event listeners for quantity change
+        cartItem.querySelector(".increase").addEventListener("click", () => {
+            updateItemQuantity(item.name, 1); // Increase the quantity
+        });
+        cartItem.querySelector(".decrease").addEventListener("click", () => {
+            updateItemQuantity(item.name, -1); // Decrease the quantity
+        });
+
+        cartContainer.appendChild(cartItem);
+    });
+}
+
+// Function to update item quantity in the cart
+function updateItemQuantity(itemName, change) {
+    const item = cart.find(item => item.name === itemName);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            cart = cart.filter(item => item.name !== itemName);
+        }
+    }
+    updateCartDisplay();
+}
+
+// Function to add item to cart
+function addToCart(item) {
+    // Check if the item already exists in the cart
+    const existingItem = cart.find(cartItem => cartItem.name === item.name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...item, quantity: 1 });
+    }
+    updateCartDisplay();
+}
+
+// Function to create product card dynamically
+function createCard(item) {
+    const card = document.createElement("div");
+    card.classList.add("cardOne");
+
+    const cardContent = `
+        <div class="cardImg">
+            <img src="${item.image.desktop}" alt="${item.name}">
+            <button class="btn">
+                <img src="./assets/images/icon-add-to-cart.svg" alt="Add to Cart">
+                <p>Add to Cart</p>
+            </button>
+        </div>
+        <div class="cardCont">
+            <p>${item.category}</p>
+            <h3>${item.name}</h3>
+            <span>$${item.price}</span>
+        </div>
+    `;
+
+    card.innerHTML = cardContent;
+
+    // Add event listener to the "Add to Cart" button
+    card.querySelector(".btn").addEventListener("click", () => {
+        addToCart(item);
+    });
+
+    Wrapper.appendChild(card);
+}
+
+// Render all products dynamically
 const products = [
     {
        "image": {
-            "thumbnail": "./assets/images/image-waffle-thumbnail.jpg",
-            "mobile": "./assets/images/image-waffle-mobile.jpg",
-            "tablet": "./assets/images/image-waffle-tablet.jpg",
             "desktop": "./assets/images/image-waffle-desktop.jpg"
        },
        "name": "Waffle with Berries",
@@ -14,9 +101,6 @@ const products = [
     },
     {
         "image": {
-            "thumbnail": "./assets/images/image-creme-brulee-thumbnail.jpg",
-            "mobile": "./assets/images/image-creme-brulee-mobile.jpg",
-            "tablet": "./assets/images/image-creme-brulee-tablet.jpg",
             "desktop": "./assets/images/image-creme-brulee-desktop.jpg"
         },
         "name": "Vanilla Bean Crème Brûlée",
@@ -25,9 +109,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-macaron-thumbnail.jpg",
-            "mobile": "./assets/images/image-macaron-mobile.jpg",
-            "tablet": "./assets/images/image-macaron-tablet.jpg",
             "desktop": "./assets/images/image-macaron-desktop.jpg"
         },
         "name": "Macaron Mix of Five",
@@ -36,9 +117,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-tiramisu-thumbnail.jpg",
-            "mobile": "./assets/images/image-tiramisu-mobile.jpg",
-            "tablet": "./assets/images/image-tiramisu-tablet.jpg",
             "desktop": "./assets/images/image-tiramisu-desktop.jpg"
         },
         "name": "Classic Tiramisu",
@@ -47,9 +125,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-baklava-thumbnail.jpg",
-            "mobile": "./assets/images/image-baklava-mobile.jpg",
-            "tablet": "./assets/images/image-baklava-tablet.jpg",
             "desktop": "./assets/images/image-baklava-desktop.jpg"
         },
         "name": "Pistachio Baklava",
@@ -58,9 +133,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-meringue-thumbnail.jpg",
-            "mobile": "./assets/images/image-meringue-mobile.jpg",
-            "tablet": "./assets/images/image-meringue-tablet.jpg",
             "desktop": "./assets/images/image-meringue-desktop.jpg"
         },
         "name": "Lemon Meringue Pie",
@@ -69,9 +141,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-cake-thumbnail.jpg",
-            "mobile": "./assets/images/image-cake-mobile.jpg",
-            "tablet": "./assets/images/image-cake-tablet.jpg",
             "desktop": "./assets/images/image-cake-desktop.jpg"
         },
         "name": "Red Velvet Cake",
@@ -80,9 +149,6 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-brownie-thumbnail.jpg",
-            "mobile": "./assets/images/image-brownie-mobile.jpg",
-            "tablet": "./assets/images/image-brownie-tablet.jpg",
             "desktop": "./assets/images/image-brownie-desktop.jpg"
         },
         "name": "Salted Caramel Brownie",
@@ -91,43 +157,13 @@ const products = [
      },
      {
         "image": {
-            "thumbnail": "./assets/images/image-panna-cotta-thumbnail.jpg",
-            "mobile": "./assets/images/image-panna-cotta-mobile.jpg",
-            "tablet": "./assets/images/image-panna-cotta-tablet.jpg",
             "desktop": "./assets/images/image-panna-cotta-desktop.jpg"
         },
         "name": "Vanilla Panna Cotta",
         "category": "Panna Cotta",
         "price": 6.50
      }
-    ]
-function createCard(item) {
-        card = document.createElement("div");
-    
-        card.classList.add("cardOne");
-    
-        cardContent = `
-              <div class="cardOne">
-        <div class="cardImg">
-            <img src=${item.image.desktop} alt="image">
-            <button class="btn">
-                <img src="./assets/images/icon-add-to-cart.svg" alt="to cart image">
-                <p>Add to Cart</p>
-            </button>
-        </div>
-        <div class="cardCont">
-            <p>$ ${item.category}</p>
-            <h3>$ ${item.name}</h3>
-            <span><p>$ ${item.price}</p></span>
-        </div>
-    </div>       
-        `;
-    
-        card.innerHTML = cardContent;
-    
-        Wrapper.appendChild(card);
-     }
+];
 
-products.filter((item) => {
-    return createCard(item);
-})
+// Loop through each product and create cards
+products.forEach(item => createCard(item));

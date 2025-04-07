@@ -132,6 +132,72 @@ body{
     font-weight: 500;
     color: hsl(12, 20%, 44%);
 }
+
+.cartItem {
+    display: flex;
+    justify-content: space-between; /* This will space out the cart item content */
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cartItemDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.cartItemQuantity {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between the buttons and quantity */
+}
+
+.cartItemQuantity button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cartItemQuantity span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Flexbox adjustment for the cart item to align quantity section to the right */
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartItemDetails {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* This allows it to take available space */
+}
+
+.cartItemQuantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end; /* Align the quantity section to the right */
+}
+
+/* Styling for the buttons */
+.cartItemQuantity button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.cartItemQuantity span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 @media (max-width: 1024px) {
     .container {
         grid-template-columns: 1fr;
