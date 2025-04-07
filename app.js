@@ -167,3 +167,42 @@ const products = [
 
 // Loop through each product and create cards
 products.forEach(item => createCard(item));
+
+// Function to update the cart display
+function updateCartDisplay() {
+    cartContainer.innerHTML = `<h3>Your Cart (${cart.length})</h3>`; // Update cart header with item count
+    cart.forEach(item => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cartItem");
+
+        cartItem.innerHTML = `
+            <div class="cartItemDetails">
+                <h4>${item.name}</h4>
+                <p>$${item.price} x ${item.quantity}</p>
+            </div>
+            <div class="cartItemQuantity">
+                <button class="decrease">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase">+</button>
+            </div>
+        `;
+
+        // Add event listeners for quantity change
+        cartItem.querySelector(".increase").addEventListener("click", () => {
+            updateItemQuantity(item.name, 1);
+        });
+        cartItem.querySelector(".decrease").addEventListener("click", () => {
+            updateItemQuantity(item.name, -1);
+        });
+
+        cartContainer.appendChild(cartItem);
+    });
+
+    // Only show Checkout button if cart has items
+    const checkoutButton = document.querySelector(".checkout-btn");
+    if (cart.length > 0) {
+        checkoutButton.style.display = "block";  // Show Checkout button
+    } else {
+        checkoutButton.style.display = "none";  // Hide Checkout button
+    }
+}

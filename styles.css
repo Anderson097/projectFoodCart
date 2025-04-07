@@ -149,7 +149,7 @@ body{
 .cartItemQuantity {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between the buttons and quantity */
+    gap: 10px;
 }
 
 .cartItemQuantity button {
@@ -164,7 +164,6 @@ body{
     font-weight: bold;
 }
 
-/* Flexbox adjustment for the cart item to align quantity section to the right */
 .cartItem {
     display: flex;
     justify-content: space-between;
@@ -174,14 +173,14 @@ body{
 .cartItemDetails {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* This allows it to take available space */
+    flex-grow: 1; 
 }
 
 .cartItemQuantity {
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: flex-end; /* Align the quantity section to the right */
+    justify-content: flex-end;
 }
 
 /* Styling for the buttons */
@@ -196,6 +195,30 @@ body{
 .cartItemQuantity span {
     font-size: 16px;
     font-weight: bold;
+}
+
+/* Checkout Button Style */
+.checkout-btn {
+    background-color: #e67e22; 
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    width: 100%; 
+    margin-top: 20px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease;
+    display: none; 
+}
+
+.checkout-btn:hover {
+    background-color: #e67e22; 
+}
+
+.checkout-btn:active {
+    background-color: #e67e22;
 }
 
 @media (max-width: 1024px) {
